@@ -1,1 +1,1 @@
-# New--git-practice
+# New--git-practiceこのリポジトリはGitの練習用です。
