@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Webサーバー
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+
+  # データベース（MySQL）
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      # DBの初期設定（環境変数）
+      MYSQL_ROOT_PASSWORD: password # rootユーザーのパスワード
+      MYSQL_DATABASE: my_app_db     # 最初に自動作成されるDB名
+      MYSQL_USER: user              # 一般ユーザー名
+      MYSQL_PASSWORD: password      # 一般ユーザーのパスワード
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql      # DBデータを保持するためのVolume
+
+  # 名前付きVolumeの定義（コンテナを消してもデータが残る専用領域）
+volumes:
+  db-data:
