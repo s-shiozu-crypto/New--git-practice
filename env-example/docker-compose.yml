@@ -1,0 +1,8 @@
+services:
+ app:
+  image: node
+  volumes:
+   - ./:/node
+  env_file:
+   - .env
+  tty: true
